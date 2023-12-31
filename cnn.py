@@ -1,7 +1,7 @@
-#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # cnn.py
-# Using InceptionV3
-#-----------------------------------------------------------------------
+# Adapted from Yale Digital Humanities Lab's Pixplot project using InceptionV3
+#-----------------------------------------------------------------------------
 from keras.preprocessing.image import save_img, img_to_array, array_to_img, load_img
 from keras.applications.inception_v3 import preprocess_input
 from keras.applications import InceptionV3
@@ -12,6 +12,8 @@ import json
 from scipy.spatial.distance import cdist
 
 model = InceptionV3(include_top=False, pooling='avg', weights='imagenet')
+
+# to create static dataset
 folder_vectors = []
 image_paths = []
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -26,35 +28,39 @@ class Image:
         vec = model.predict(np.expand_dims(img, 0)).squeeze()
         return vec    
 
-def save_image_paths(image_paths, filename='image_paths.json'):
+# for initializing static dataset
+def save_image_paths(image_paths, filename):
     filepath = os.path.join(base_path, filename)
     with open(filepath, 'w') as file:
         json.dump(image_paths, file)
 
-def save_folder_vectors(folder_vectors, filename='folder_vectors.npy'):
+def save_folder_vectors(folder_vectors, filename):
     filepath = os.path.join(base_path, filename)
     np.save(filepath, folder_vectors)
 
-def load_image_paths(filename='image_paths.json'):
+# for using static dataset
+def load_image_paths(filename):
     filepath = os.path.join(base_path, filename)
     with open(filepath, 'r') as file:
         return json.load(file)
 
-def load_folder_vectors(filename='folder_vectors.npy'):
+def load_folder_vectors(filename):
     filepath = os.path.join(base_path, filename)
     return np.load(filepath, allow_pickle=True)
 
+# for creating static feature vectors
 def store_feature_vectors(folder_path):
     global folder_vectors
     global image_paths
     
+    # extract all images from folders within folders
     image_paths = glob.glob(os.path.join(folder_path, '**/*.jpg'), recursive=True) 
-    print("testing: " + str(len(image_paths)))
     folder_images = []
     for path in image_paths:
         image = Image(path)
         folder_images.append(image)
     
+    # get feature vectors for images
     for image in folder_images:
         vector = image.get_inception_vector(model)
         folder_vectors.append(vector)
@@ -63,13 +69,13 @@ def store_feature_vectors(folder_path):
     save_image_paths(image_paths, 'medi_image_paths.json')
     save_folder_vectors(folder_vectors, 'medi_folder_vectors.npy')
 
-
+# add second dataset_path parameter when dynamic
 def find_closest_images(input_image_path):
     # Vectorize input image
     input_image = Image(input_image_path)
     input_vector = input_image.get_inception_vector(model)
 
-    # Vectorize dataset images
+    # For dynamic dataset: Vectorize dataset images
     # image_paths = glob.glob(os.path.join(folder_path, '*.jpg')) 
     # image_paths = glob.glob(os.path.join(folder_path, '**/*.jpg'), recursive=True) 
     # print("testing: " + str(len(image_paths)))
@@ -97,12 +103,7 @@ def find_closest_images(input_image_path):
     five_closest = closest_images_index[:5]
     return [image_paths[i] for i in five_closest]
 
-# user_image = '../API/temporary.jpg'
-# dataset_path = '../Database/dataset/'
-# print('is this running')
-# closest_images = find_closest_images(user_image, dataset_path)
-# print("Closest images: ", closest_images)
-
+# ran once to create folder vectors and image paths
 # path = '../Database/dataset/'
 # store_feature_vectors(path)
 # print("are we getting here")

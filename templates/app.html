@@ -1,3 +1,12 @@
+<!-- ---------------------------------------------------------------------------------------------------- -->
+<!-- app.html -->
+<!-- Learned from tutorials below: -->
+<!-- How to Upload Image On Website Using Javascript: https://www.youtube.com/watch?v=xXrs4j-p3yE&t=299s -->
+<!-- How to make a Website Header Using HTML and CSS: https://www.youtube.com/watch?v=Oa9LTDR9ugU&t=484s -->
+<!-- Get Data from API & Display in HTML: https://www.youtube.com/watch?v=zUcc4vW-jsI&t=207s -->
+<!-- JavaScript fetch API: https://www.youtube.com/watch?v=R9mSRUpoVXc&t=2s -->
+<!-- ---------------------------------------------------------------------------------------------------- -->
+
 <html>
     <head>
         <title> Gallery Finder </title>
@@ -11,6 +20,7 @@
                     <h1> Gallery Finder </h1>
                     <p> Curate your experience. Insert your favorite art piece to see what current New York exhibitions 
                         resonate with you (jpg and png only) </p>
+                    <!-- flex file types -->
                     <form enctype="multipart/form-data">
                         <input type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" name="image">
                         <button type="submit">Upload Image</button>
@@ -23,7 +33,7 @@
             event.preventDefault();
             console.log('testing');
             const exhibitionInfo = new FormData(event.target);
-
+            // changed from localhost/upload for heroku
             fetch('/upload', {
                 method: 'POST',
                 body: exhibitionInfo
@@ -33,6 +43,7 @@
                 console.log('POST request successful');
                 localStorage.setItem('exhibitions', JSON.stringify(data));
                 window.location.href = '/result';
+                // add api
             })
             .catch(error => console.error('Error', error));
         }

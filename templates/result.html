@@ -1,3 +1,6 @@
+<!-- ---------------------------------------------------------------------------------------------------- -->
+<!-- result.html -->
+<!-- ---------------------------------------------------------------------------------------------------- -->
 <html>
     <head>
         <title> Exhibitions </title>
@@ -29,12 +32,15 @@
     <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const tempExhibitions = JSON.parse(localStorage.getItem('exhibitions') || '[]');
+        // double array
         const exhibitions = tempExhibitions[1];
+        // update each of the five galleries in html art class
         exhibitions.forEach((exhibition, index) => 
         {
             const exhibitionElement = document.querySelector(`.art${index + 1}`);
             if (exhibitionElement) {
                 console.log('are we getting here');
+                // exhibition.name = artwork name
                 exhibitionElement.innerHTML = `
                     <h3>${exhibition.exhibition.name}</h3>
                     <h3>by ${exhibition.artist.name}</h3>
