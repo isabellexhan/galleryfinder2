@@ -36,13 +36,16 @@
             if (exhibitionElement) {
                 console.log('are we getting here');
                 exhibitionElement.innerHTML = `
-                    <p>${exhibition.exhibition.name}</p>
-                    <p>${exhibition.exhibition.duration}</p>
-                    <p>${exhibition.artist.name}</p>
-                    <p>${exhibition.exhibition.gallery.name}</p>
-                    <p>${exhibition.exhibition.gallery.hours}</p>
-                    <p>${exhibition.exhibition.gallery.location}</p>
+                    <h3>${exhibition.exhibition.name}</h3>
+                    <h3>by ${exhibition.artist.name}</h3>
+                    <p><em><strong>Where: </em></strong><br>
+                        ${exhibition.exhibition.gallery.name} <br>
+                        at ${exhibition.exhibition.gallery.location}</p>
+                    <p><em><strong>When: </em></strong><br>
+                        ${exhibition.exhibition.duration} <br>
+                        ${exhibition.exhibition.gallery.hours}</p>
                     <img src="data:image/jpg;base64,${exhibition.image}" alt="${exhibition.name}" />
+                    <p>${exhibition.name}</p>
                 `;
             }
         })
