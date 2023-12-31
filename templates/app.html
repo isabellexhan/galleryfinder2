@@ -43,9 +43,9 @@
                 console.log('POST request successful');
                 localStorage.setItem('exhibitions', JSON.stringify(data));
                 window.location.href = '/result';
-                // add api
+                // add api destination
             })
-            .catch(error => console.error('Error', error));
+            .catch(error => console.error('error', error));
         }
         document.querySelector('form').addEventListener('submit', redirectForm);
     </script>

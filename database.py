@@ -45,8 +45,7 @@ class Exhibition (Base):
             'gallery_info': {
                 'id': self.gallery.id,
                 'name': self.gallery.name
-            } if self.gallery else None,
-            'artworks_info': [{'id': artwork.id, 'name': artwork.name} for artwork in self.artworks]
+            }
         }
 
 class Artist (Base):
@@ -57,10 +56,15 @@ class Artist (Base):
 
     @property
     def serialize(self):
+        artworks_info = []
+        for artwork in self.artworks:
+            artwork = {'id': artwork.id, 'name': artwork.name}
+            artworks_info.append(artwork)
+        
         return {
             'id': self.id,
             'name': self.name,
-            'artworks_info': [{'id': artwork.id, 'name': artwork.name} for artwork in self.artworks]
+            'artworks_info': artworks_info
         }
 
 class Artwork (Base):
@@ -85,13 +89,13 @@ class Artwork (Base):
                 'name': self.exhibition.gallery.name,
                 'hours': self.exhibition.gallery.hours,
                 'location': self.exhibition.gallery.location
-            } if self.exhibition and self.exhibition.gallery else None
-        } if self.exhibition else None
+            } 
+        } 
 
         artist_info = {
             'id': self.artist.id,
             'name': self.artist.name
-        } if self.artist else None
+        } 
 
         image_data = base64.b64encode(self.image).decode() if self.image else None
         

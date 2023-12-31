@@ -31,7 +31,7 @@
         </div>
     <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        const tempExhibitions = JSON.parse(localStorage.getItem('exhibitions') || '[]');
+        const tempExhibitions = JSON.parse(localStorage.getItem('exhibitions'));
         // double array
         const exhibitions = tempExhibitions[1];
         // update each of the five galleries in html art class

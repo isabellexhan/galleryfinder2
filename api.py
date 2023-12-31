@@ -40,20 +40,20 @@ def result():
     return render_template('result.html')
 
 # for testing
-@app.route('/artworks', methods=['GET'])
-def get_artworks():
-    artworks = db.session.query(Artwork).options(joinedload(Artwork.artist), joinedload(Artwork.exhibition)).all()
-    return jsonify([artwork.serialize for artwork in artworks])
+# @app.route('/artworks', methods=['GET'])
+# def get_artworks():
+#     artworks = db.session.query(Artwork).options(joinedload(Artwork.artist), joinedload(Artwork.exhibition)).all()
+#     return jsonify([artwork.serialize for artwork in artworks])
 
-# for testing
-@app.route('/artwork/<string:artwork_id>', methods=['GET'])
-def get_artwork(artwork_id):
-    artwork = db.session.query(Artwork).options(joinedload(Artwork.artist), joinedload(Artwork.exhibition)).filter_by(id=artwork_id).first()
-    if artwork:
-        artwork_data = artwork.serialize
-        return jsonify(artwork_data)
-    else:
-        return jsonify({'message': 'Artwork not found'}), 404
+# # for testing
+# @app.route('/artwork/<string:artwork_id>', methods=['GET'])
+# def get_artwork(artwork_id):
+#     artwork = db.session.query(Artwork).options(joinedload(Artwork.artist), joinedload(Artwork.exhibition)).filter_by(id=artwork_id).first()
+#     if artwork:
+#         artwork_data = artwork.serialize
+#         return jsonify(artwork_data)
+#     else:
+#         return jsonify({'message': 'Artwork not found'}), 404
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
@@ -90,7 +90,7 @@ def upload_image():
                 if artwork: 
                     exhibition_info.append(artwork.serialize)
 
-            return jsonify("Recommended Exhibitions:", exhibition_info)
+            return jsonify("Recommended Exhibitions: ", exhibition_info)
         else:
             return jsonify({'message': 'No closest images found'}), 404
     

@@ -54,6 +54,7 @@ def store_feature_vectors(folder_path):
     global image_paths
     
     # extract all images from folders within folders
+    # jpg specific
     image_paths = glob.glob(os.path.join(folder_path, '**/*.jpg'), recursive=True) 
     folder_images = []
     for path in image_paths:
