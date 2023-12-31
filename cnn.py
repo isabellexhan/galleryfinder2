@@ -60,8 +60,8 @@ def store_feature_vectors(folder_path):
         folder_vectors.append(vector)
     folder_vectors = np.array(folder_vectors)
 
-    save_image_paths(image_paths, 'image_paths.json')
-    save_folder_vectors(folder_vectors, 'folder_vectors.npy')
+    save_image_paths(image_paths, 'medi_image_paths.json')
+    save_folder_vectors(folder_vectors, 'medi_folder_vectors.npy')
 
 
 def find_closest_images(input_image_path):
@@ -85,8 +85,8 @@ def find_closest_images(input_image_path):
     #     folder_vectors.append(vector)
     # folder_vectors = np.array(folder_vectors)
 
-    image_paths = load_image_paths('mini_image_paths.json')
-    folder_vectors = load_folder_vectors('mini_folder_vectors.npy')
+    image_paths = load_image_paths('medi_image_paths.json')
+    folder_vectors = load_folder_vectors('medi_folder_vectors.npy')
     
     # Calculate cosine similarity
     distances2d = cdist([input_vector], folder_vectors, 'cosine')

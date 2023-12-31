@@ -18,7 +18,7 @@ Artwork = Artwork
 
 
 app = Flask(__name__)
-db_path = os.path.join(os.path.dirname(__file__), 'mini.sqlite')
+db_path = os.path.join(os.path.dirname(__file__), 'medi.sqlite')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
