@@ -29,6 +29,10 @@ db.Model = Base
 def home():
     return render_template('app.html')
 
+@app.route('/result')
+def result():
+    return render_template('result.html')
+
 @app.route('/artworks', methods=['GET'])
 def get_artworks():
     artworks = db.session.query(Artwork).options(joinedload(Artwork.artist), joinedload(Artwork.exhibition)).all()
