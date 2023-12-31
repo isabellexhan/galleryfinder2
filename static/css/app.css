@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../images/empty\ gallery.webp);
+    background-position: center;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.row{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.column{
+    flex-basis: 50%;
+}
+
+h1{
+    color: white;
+    font-size: 100px;
+}
+
+h5{
+    color: white;
+    font-size: 25px;
+}
+
+p{
+    color: white;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+button{
+    width: 180px;
+    color: black;
+    font-size: 15px;
+    padding: 12px 0;
+    background: white;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 10px;
+}
+
+.art{
+    width: 200px;
+    height: 230px;
+    display: inline-block;
+    border: 5px solid gray;
+    border-radius: 10px;
+    padding: 15px 25px;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-position: center;
+    background-size: cover;
+}
+
+.yourart{
+    background-image: url();
+}
+
+.art1{
+    background-image: url();
+}
+
+.art2{
+    background-image: url();
+}
+
+.art3{
+    background-image: url();
+}
+
+.art4{
+    background-image: url();
+}
+
+.art5{
+    background-image: url();
+}

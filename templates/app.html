@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title> Gallery Finder </title>
+        <!-- <link rel="stylesheet" href="app.css"> -->
+        <link rel="stylesheet" href="../static/css/app.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="column">
+                    <h1> Gallery Finder </h1>
+                    <p> Curate your experience. Insert your favorite art piece to see what current New York exhibitions 
+                        resonate with you (jpg and png only) </p>
+                    <form enctype="multipart/form-data">
+                        <input type="file" accept="image/jpeg, image/jpg, image/png" id="input-file" name="image">
+                        <button type="submit">Upload Image</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <script>
+        function redirectForm(event) {
+            event.preventDefault();
+            console.log('testing');
+            const exhibitionInfo = new FormData(event.target);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: exhibitionInfo
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('POST request successful');
+                localStorage.setItem('exhibitions', JSON.stringify(data));
+                window.location.href = 'result.html';
+            })
+            .catch(error => console.error('Error', error));
+        }
+        document.querySelector('form').addEventListener('submit', redirectForm);
+    </script>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title> Exhibitions </title>
+        <link rel="stylesheet" href="../static/css/result.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="art art1">
+                <img src = "">
+                <p>Exhibition 1</p>
+            </div>
+            <div class="art art2">
+                <img src = "">
+                <p>Exhibition 2</p>
+            </div>
+            <div class="art art3">
+                <img src = "">
+                <p>Exhibition 3</p>
+            </div>
+            <div class="art art4">
+                <img src = "">
+                <p>Exhibition 4</p>
+            </div>
+            <div class="art art5">
+                <img src = "">
+                <p>Exhibition 5</p>
+            </div>
+        </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const tempExhibitions = JSON.parse(localStorage.getItem('exhibitions') || '[]');
+        const exhibitions = tempExhibitions[1];
+        exhibitions.forEach((exhibition, index) => 
+        {
+            const exhibitionElement = document.querySelector(`.art${index + 1}`);
+            if (exhibitionElement) {
+                console.log('are we getting here');
+                exhibitionElement.innerHTML = `
+                    <p>${exhibition.exhibition.name}</p>
+                    <p>${exhibition.exhibition.duration}</p>
+                    <p>${exhibition.artist.name}</p>
+                    <p>${exhibition.exhibition.gallery.name}</p>
+                    <p>${exhibition.exhibition.gallery.hours}</p>
+                    <p>${exhibition.exhibition.gallery.location}</p>
+                    <img src="data:image/jpg;base64,${exhibition.image}" alt="${exhibition.name}" />
+                `;
+            }
+        })
+    });
+    </script>
+    </body>
+</html>

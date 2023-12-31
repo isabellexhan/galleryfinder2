@@ -1,0 +1,10 @@
+Flask==3.0.0
+Flask-Cors==4.0.0
+Flask-SQLAlchemy==3.1.1
+SQLAlchemy==2.0.23
+tensorflow-cpu==2.15.0
+Pillow
+Keras==2.15.0
+numpy==1.26.0
+scipy==1.11.4
+gunicorn==21.2.0
